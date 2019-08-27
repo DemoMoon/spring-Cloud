@@ -1,0 +1,20 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: usercenter-consumer
+
+eureka:
+  instance:
+    hostname: localhost
+    port: 8081
+    #注意，EurekaServer一定要设置eureka.server.eviction-interval-timer-in-ms否则这个配置无效，这个配置一般为服务刷新时间配置的三倍
+    #默认90s
+    lease-expiration-duration-in-seconds: 15
+    #服务刷新时间配置，每隔这个时间会主动心跳一次
+    #默认30s
+    lease-renewal-interval-in-seconds: 5
+  client:
+    serviceUrl: #设置eureka server的交互地址，即对外暴露的地址
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
